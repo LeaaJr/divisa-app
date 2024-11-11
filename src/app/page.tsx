@@ -1,101 +1,69 @@
-import Image from "next/image";
+"use client"
+
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [divisas, setDivisas] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    // Reemplaza esta URL con la URL correcta de la API de divisas
+    axios.get('https://api.exchangerate-api.com/v4/latest/USD')
+      .then((response) => {
+        setDivisas(Object.entries(response.data.rates)); // Convierte las divisas en un array de arrays
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error al obtener las divisas:', error);
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <div className="flex flex-col pt-[12rem] pb-[12rem] px-6">
+      {/* Sección con la imagen y el texto en paralelo */}
+      <div className="flex justify-between items-start h-auto max-w-full mb-6">
+        {/* Lado derecho con la imagen de "Device Mockups" */}
+        <div className="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[454px] max-w-[341px] md:h-[682px] md:max-w-[512px]">
+          <div className="h-[32px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[17px] top-[72px] rounded-s-lg"></div>
+          <div className="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[17px] top-[124px] rounded-s-lg"></div>
+          <div className="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -start-[17px] top-[178px] rounded-s-lg"></div>
+          <div className="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-800 absolute -end-[17px] top-[142px] rounded-e-lg"></div>
+          <div className="rounded-[2rem] overflow-hidden h-[426px] md:h-[654px] bg-white dark:bg-gray-800">
+            <img src="https://flowbite.s3.amazonaws.com/docs/device-mockups/tablet-mockup-image.png" className="dark:hidden h-[426px] md:h-[654px]" alt="" />
+            <img src="https://flowbite.s3.amazonaws.com/docs/device-mockups/tablet-mockup-image-dark.png" className="hidden dark:block h-[426px] md:h-[654px]" alt="" />
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Lado izquierdo con texto (Lorem Ipsum) y scroll */}
+        <div className="w-1/2 p-4 bg-gray-transparent text-white h-[454px]">
+          <p className="text-lg mb-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia ex, sapiente natus maiores quo atque sint nihil amet accusamus impedit officiis sed nesciunt velit in! Ipsa perferendis harum asperiores eum.</p>
+          <p className="text-lg mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam laudantium ab dolorem veniam reiciendis repudiandae possimus totam dignissimos a magni natus, quia aliquam aliquid distinctio quam eligendi voluptatibus inventore nobis.</p>
+          <p className="text-lg mb-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe nihil nulla dolorum inventore aperiam natus praesentium a officia ad perspiciatis, laudantium in aspernatur eos unde? Sed error nam eaque inventore.</p>
+        </div>
+      </div>
+
+      <div className="py-44 text-center">
+      <h1 className="text-5xl font-bold mb-4">Divisas hoy</h1>
+      </div>
+
+      {/* Si estamos cargando, mostrar un mensaje de carga */}
+      {loading ? (
+        <div>Cargando...</div>
+      ) : (
+        // Aquí viene la tarjeta con las divisas
+        <div className="bg-[#1f1f1f3d] p-6 rounded-lg shadow-md">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {divisas.map(([currency, rate]) => (
+              <div key={currency} className="bg-transparent p-4 rounded-lg shadow-sm text-center">
+                <h4 className="font-semibold">{currency}</h4>
+                <p>{rate}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
