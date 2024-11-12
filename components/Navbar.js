@@ -1,7 +1,7 @@
-"use client"; // Habilitamos hooks si es necesario más adelante.
+"use client";
 
 import Link from 'next/link';
-import styles from '../styles/Navbar.module.css'; // Para estilos si decides usar CSS Modules
+import styles from '../styles/Navbar.module.css';
 
 export default function Navbar() {
   return (
