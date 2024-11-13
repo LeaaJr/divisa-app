@@ -1,0 +1,54 @@
+/* Footer.module.css */
+.footer {
+    background-color: transparent;
+    color: #fff;
+    padding: 20px;
+    margin-top: 5rem;
+}
+
+.footer .mx-auto {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas de igual tamaño */
+    gap: 20px; /* Espacio entre las columnas */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footerSection {
+    padding: 10px;
+}
+
+.footerHeading {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.footerLinks {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footerLinks li {
+    margin: 10px 0;
+}
+
+.footerBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.footerSocials {
+    display: flex;
+    gap: 15px;
+}
+
+.socialIcon {
+    color: #fff;
+    text-decoration: none;
+}
+
+.socialIcon:hover {
+    opacity: 0.7;
+}

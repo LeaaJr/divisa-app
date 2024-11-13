@@ -85,7 +85,8 @@ export default function Home() {
       )}
       
       <GraphCard />
-      {/* <Footer /> */}
+
+      <Footer />
     </div>
   );
 }
